@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="pot"
+            type="com.lakooz.lpctest.model.Pot" />
+
+    </data>
+
+    <!-- TODO -->
+
+
+</layout>

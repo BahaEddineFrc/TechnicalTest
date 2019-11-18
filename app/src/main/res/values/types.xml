@@ -1,0 +1,16 @@
+<resources>
+
+    <!--Typography-->
+
+
+    <!--These styles should be used throughout your app when creating text views-->
+
+    <style name="TextAppearance.MyTheme.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="TextAppearance.MyTheme.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+</resources>

@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">LPCTest</string>
+    <string name="birthday">Anniversaire</string>
+    <string name="farewell">Départ</string>
+    <string name="solidarity">Solidaire</string>
+    <string name="no_pots">Pas de Pots !</string>
+    <string name="error">Oups une erreur est survenue !</string>
+</resources>
