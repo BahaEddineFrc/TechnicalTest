@@ -5,4 +5,6 @@
     <string name="solidarity">Solidaire</string>
     <string name="no_pots">Pas de Pots !</string>
     <string name="error">Oups une erreur est survenue !</string>
+    <string name="pot_name">potName</string>
+    <string name="pot_amount">amount</string>
 </resources>

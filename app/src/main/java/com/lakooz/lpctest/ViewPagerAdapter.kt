@@ -14,5 +14,5 @@ class ViewPagerAdapter(fm: FragmentManager, lifecycle: Lifecycle) : FragmentStat
     }
 
 
-    override fun getItemCount() = 1
+    override fun getItemCount() = 3
 }
