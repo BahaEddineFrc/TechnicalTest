@@ -4,12 +4,14 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.android.material.snackbar.Snackbar
 import com.lakooz.lpctest.model.Pot
 import com.lakooz.lpctest.networking.RestApiClient
 import com.lakooz.lpctest.repositories.PotRepository
 import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
+import io.reactivex.internal.operators.single.SingleObserveOn
 import io.reactivex.schedulers.Schedulers
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
@@ -20,8 +22,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val isRefreshing: LiveData<Boolean>
         get() = _isRefreshing
 
+    private val _error = MutableLiveData<Boolean>()
+    val error: LiveData<Boolean>
+        get() = _error
 
     fun getPots() {
+
+        _isRefreshing.value=true
 
         RestApiClient.getPots()
             .subscribeOn(Schedulers.io())
@@ -36,12 +43,16 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
                 override fun onSuccess(pots: List<Pot>) {
                     disposable?.dispose()
-                    // TODO
-
+                    // Done  //add to room
+                    repository?.insertAllAndSynchronize(pots)
+                    _isRefreshing.value=false
+                    _error.value=false
                 }
 
                 override fun onError(e: Throwable) {
-                    // TODO
+                    // Done //display msg
+                    _isRefreshing.value=false
+                    _error.value=true
                 }
 
             }
@@ -50,6 +61,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun createPot(category: Int) {
+
+        _isRefreshing.value=true
 
         RestApiClient.createPot(category)
             .subscribeOn(Schedulers.io())
@@ -64,15 +77,23 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
                 override fun onSuccess(pot: Pot) {
                     disposable?.dispose()
-                    //TODO
+                    //Done //add to room
+                    repository?.createOrUpdate(pot)
+                    _isRefreshing.value=false
+                    _error.value=false
                 }
 
                 override fun onError(e: Throwable) {
-                    //TODO
+                    //Done //display msg
+                    _isRefreshing.value=false
+                    _error.value=true
                 }
 
             }
 
             )
     }
+
+
+
 }

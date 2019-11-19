@@ -16,7 +16,8 @@ android {
         versionCode 1
         versionName "1.0"
 
-        // TODO
+        // Done
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -25,8 +26,10 @@ android {
         }
     }
 
-    //TODO
-    
+    //Done
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {

@@ -1,6 +1,7 @@
 package com.lakooz.lpctest.repositories
 
 import androidx.lifecycle.LiveData
+import com.lakooz.lpctest.MyApplication
 import com.lakooz.lpctest.database.PotDao
 import com.lakooz.lpctest.model.Pot
 import io.reactivex.Single
@@ -18,8 +19,8 @@ class PotRepository(private val potDao: PotDao) {
     fun getPots(category: Int) = potDao.getPots(category)
 
     companion object {
-        // TODO : initialize
-        val instance : PotRepository
+        // TODO : toTest
+        val instance : PotRepository= PotRepository(MyApplication.database.potDao())
     }
 
 }

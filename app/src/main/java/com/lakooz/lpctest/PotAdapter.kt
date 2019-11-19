@@ -1,8 +1,10 @@
 package com.lakooz.lpctest
 
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.lakooz.lpctest.databinding.PotItemBinding
 import com.lakooz.lpctest.model.Pot
@@ -11,24 +13,37 @@ class PotAdapter(private val context: Context, private var emptyView: View? = nu
 
 
     private var pots: List<Pot>? = null
+
+    //todo get RV
     private var recyclerView: RecyclerView?= null
 
 
     fun setPots(pots: List<Pot>?) {
-            this.pots = pots
-        // TODO : notify data change and handle empty view
+        this.pots = pots
+        if (pots!!.isEmpty()) emptyView!!.visibility=View.VISIBLE
+        else emptyView!!.visibility=View.GONE
+
+        notifyDataSetChanged()
+
+        // Normally Done : notify data change and handle empty view
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-       //TODO
+        //Done
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val potBinding = DataBindingUtil.inflate(layoutInflater, R.layout.pot_item, parent,false) as PotItemBinding
+        return ViewHolder(potBinding)
     }
 
     override fun getItemCount(): Int {
-        // TODO
+        // Done
+        return pots!!.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        // TODO : bind view holder & format amount properly
+        // TODO : bind view holder & "format amount properly" (i don't get it)
+        val pot = pots!![position]
+        holder.bind(pot)
 
     }
 
@@ -44,5 +59,10 @@ class PotAdapter(private val context: Context, private var emptyView: View? = nu
         super.onDetachedFromRecyclerView(recyclerView)
     }
 
-    inner class ViewHolder(val binding: PotItemBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ViewHolder(val binding: PotItemBinding) : RecyclerView.ViewHolder(binding.root){
+        fun bind( pot: Pot) {
+            binding.pot  = pot
+            binding.executePendingBindings()
+        }
+    }
 }

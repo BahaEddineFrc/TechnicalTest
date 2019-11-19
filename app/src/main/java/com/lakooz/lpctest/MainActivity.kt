@@ -2,14 +2,23 @@ package com.lakooz.lpctest
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.lakooz.lpctest.databinding.ActivityMainBinding
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding : ActivityMainBinding
+    private val TABS= arrayOf("ANNIVERSAIRE", "DEPART", "SOLIDAIRE")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,13 +38,23 @@ class MainActivity : AppCompatActivity() {
 
         TabLayoutMediator(tabLayout, viewPager,
             TabLayoutMediator.TabConfigurationStrategy { tab, position ->
-                // TODO : set tabs titles
+                // Done : set tabs titles
+                tab.text = TABS[position]
             }).attach()
 
 
        swipeRefreshLayout.setProgressViewOffset(true, START_SWIPE_REFRESH, resources.getDimension(R.dimen.swipe_refresh_offset).toInt())
 
-        // TODO : set up view model
+        // Done : set up view model
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val model = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        binding.viewmodel=model
+
+        model.error.observe(this, Observer { isError->
+            if(isError)
+                Snackbar.make(root,R.string.error,Snackbar.LENGTH_SHORT)
+                    .setAction("Dismiss", View.OnClickListener {  })
+        })
 
 
 
@@ -51,7 +70,8 @@ class MainActivity : AppCompatActivity() {
         })
 
         fab.setOnClickListener {
-            // TODO
+            // TODO : ecmhi l'create Pot
+            //startActivity( Intent(this@MainActivity, CreatePotActivity::class.java) )
         }
     }
 
