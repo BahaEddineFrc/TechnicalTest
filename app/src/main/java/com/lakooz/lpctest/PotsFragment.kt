@@ -8,12 +8,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.lakooz.lpctest.databinding.PotsFragmentBinding
 import kotlinx.android.synthetic.main.pots_fragment.*
 
 class PotsFragment : Fragment() {
 
     lateinit var model :PotsViewModel
+    lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,26 +27,32 @@ class PotsFragment : Fragment() {
         val binding = PotsFragmentBinding.inflate(inflater, container, false)
 
         // set up recycler view
-        setUpRecyclerView()
+        recyclerView=binding.root.findViewById(R.id.recycler_view)
+
 
         // Done : set up view model
         //todo: get category number
+
         var category = 1
         model = ViewModelProviders.of(this).get(PotsViewModel::class.java)
         binding.viewmodel=model
+
+        setUpRecyclerView()
 
         return binding.root
     }
 
     private fun setUpRecyclerView() {
+        recyclerView.layoutManager= LinearLayoutManager(context)
         var adapter = PotAdapter(context!!,empty_placeholder)
-        recycler_view.adapter=adapter
-        recycler_view.layoutManager= LinearLayoutManager(context)
+        recyclerView.adapter=adapter
 
         var category = 1
+
+
         model.getPots(category)
         model.pots.observe(this, Observer { pots->
-            adapter.setPots(pots)
+            //adapter.setPots(pots)
         })
     }
 }

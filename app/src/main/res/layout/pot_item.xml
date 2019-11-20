@@ -29,8 +29,9 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:foreground="@drawable/pot_gradient_mask"
                     android:layout_marginBottom="5dp"
-                    android:img="@{pot.imageUrl}"
+                    android:imageUrl="@{pot.imageUrl}"
                     android:src="@color/colorPrimary" />
 
                 <TextView

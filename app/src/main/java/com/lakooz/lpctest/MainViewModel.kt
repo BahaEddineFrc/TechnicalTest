@@ -1,6 +1,7 @@
 package com.lakooz.lpctest
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -44,6 +45,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 override fun onSuccess(pots: List<Pot>) {
                     disposable?.dispose()
                     // Done  //add to room
+                    Log.d("heree","getPots onSuccess")
                     repository?.insertAllAndSynchronize(pots)
                     _isRefreshing.value=false
                     _error.value=false
@@ -51,6 +53,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
                 override fun onError(e: Throwable) {
                     // Done //display msg
+                    Log.d("heree","getPots onError ${e.message}")
                     _isRefreshing.value=false
                     _error.value=true
                 }
@@ -76,6 +79,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 }
 
                 override fun onSuccess(pot: Pot) {
+                    Log.d("heree","createPot onSuccess")
                     disposable?.dispose()
                     //Done //add to room
                     repository?.createOrUpdate(pot)
@@ -85,6 +89,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
                 override fun onError(e: Throwable) {
                     //Done //display msg
+                    Log.d("heree","createPot onError ${e.message}")
                     _isRefreshing.value=false
                     _error.value=true
                 }

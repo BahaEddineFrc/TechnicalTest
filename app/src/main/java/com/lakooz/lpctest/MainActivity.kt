@@ -1,7 +1,9 @@
 package com.lakooz.lpctest
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -24,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         // Done : set content view and declare views
 
-        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         var viewPager=findViewById<ViewPager2>(R.id.viewPager2)
         var tabLayout=findViewById<TabLayout>(R.id.tab_layout)
@@ -59,19 +60,25 @@ class MainActivity : AppCompatActivity() {
 
 
         swipeRefreshLayout.setOnRefreshListener {
-            // TODO
+            // TODO : test
+            model.getPots()
+            model.isRefreshing.observe(this, Observer {it->
+                swipeRefreshLayout.isRefreshing=it
+            })
         }
 
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageScrollStateChanged(state: Int) {
                 val viewPagerIdle = state == ViewPager2.SCROLL_STATE_IDLE
                 swipeRefreshLayout.isEnabled = viewPagerIdle
+                Log.d("heree","state = $state")
             }
         })
 
         fab.setOnClickListener {
-            // TODO : ecmhi l'create Pot
-            //startActivity( Intent(this@MainActivity, CreatePotActivity::class.java) )
+            // TODO : get category id
+            Log.d("heree","viewPager.currentItem = ${viewPager.currentItem}")
+            model.createPot(1)
         }
     }
 

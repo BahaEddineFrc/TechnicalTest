@@ -5,13 +5,17 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.lakooz.lpctest.R
 
-@BindingAdapter("imageUrl")
+@BindingAdapter("android:imageUrl")
 fun setImageUrl(imageView: ImageView, url: String?) {
     // Done added Glide
-    Glide
-        .with(imageView.context)
-        .load(url)
-        .centerCrop()
-        .placeholder(R.drawable.pot_gradient_mask)
-        .into(imageView)
+    if (url == null) {
+        imageView.setImageResource(R.drawable.ic_launcher_background)
+    } else {
+        Glide
+            .with(imageView.context)
+            .load(url)
+            .centerCrop()
+            .placeholder(R.drawable.ic_launcher_background)
+            .into(imageView)
+    }
 }

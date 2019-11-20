@@ -17,7 +17,7 @@ abstract class PotDao {
     @Insert
     abstract fun insertAllAndSynchronize(pots: List<Pot>)
 
-    @Query("SELECT * FROM pot ORDER BY creationDate ASC")
+    @Query("SELECT * FROM pot WHERE category=:category ORDER BY creationDate ASC")
     abstract fun getPots(category: Int) : List<Pot>
 
 }

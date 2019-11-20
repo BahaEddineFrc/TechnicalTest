@@ -13,6 +13,5 @@ class ViewPagerAdapter(fm: FragmentManager, lifecycle: Lifecycle) : FragmentStat
         return PotsFragment()
     }
 
-
     override fun getItemCount() = 3
 }

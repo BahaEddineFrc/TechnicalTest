@@ -1,9 +1,11 @@
 package com.lakooz.lpctest.model
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity
 data class Pot(
+    @PrimaryKey
     val identifier: String,
     val name: String,
     val creationDate: String,
