@@ -15,7 +15,7 @@ abstract class PotDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     abstract fun createOrUpdate(pot: Pot)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract fun insertAllAndSynchronize(pots: List<Pot>)
 
     @Query("SELECT * FROM pot WHERE category=:category ORDER BY creationDate ASC")

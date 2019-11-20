@@ -24,6 +24,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //todo : load data
+
         // Done : set content view and declare views
 
         setContentView(R.layout.activity_main)
@@ -62,7 +64,7 @@ class MainActivity : AppCompatActivity() {
 
 
         swipeRefreshLayout.setOnRefreshListener {
-            // TODO : test
+            // Done : test
             model.getPots()
             model.isRefreshing.observe(this, Observer {it->
                 swipeRefreshLayout.isRefreshing=it
@@ -77,7 +79,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         fab.setOnClickListener {
-            // TODO : test
+            // Done : test
             Log.d("heree","viewPager.currentItem = ${viewPager.currentItem}")
             model.createPot(viewPager.currentItem)
         }

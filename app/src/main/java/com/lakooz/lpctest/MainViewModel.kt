@@ -46,7 +46,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 override fun onSuccess(pots: List<Pot>) {
                     disposable?.dispose()
                     // Done  //add to room
-                    Log.d("heree","getPots onSuccess")
+                    Log.d("heree","getPots onSuccess ${pots}")
                     repository?.insertAllAndSynchronize(pots)
                     _isRefreshing.value=false
                     _error.value=false

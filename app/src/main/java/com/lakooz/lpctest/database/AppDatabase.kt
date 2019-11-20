@@ -32,10 +32,10 @@ abstract class AppDatabase : RoomDatabase() {
 
         // Done : implement
         private fun buildDatabase(context: Context) : AppDatabase {
-            return Room.databaseBuilder(
-                context,
-                AppDatabase::class.java, DATABASE_NAME
-            ).build()
+            return Room.
+                databaseBuilder( context, AppDatabase::class.java, DATABASE_NAME)
+                .allowMainThreadQueries()
+                .build()
         }
 
         fun getInstance(context: Context): AppDatabase {

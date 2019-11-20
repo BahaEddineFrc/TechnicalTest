@@ -8,7 +8,7 @@ class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        // TODO : toTest
+        // Done : works
         database = AppDatabase.getInstance(applicationContext)
 
     }

@@ -2,10 +2,12 @@ package com.lakooz.lpctest.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 
 @Entity
 data class Pot(
     @PrimaryKey
+    @SerializedName("id")
     val identifier: String,
     val name: String,
     val creationDate: String,
@@ -14,7 +16,7 @@ data class Pot(
     val amount: Double,
     val imageUrl: String?
 ) {
-    //todo
+    //Done
 
     companion object {
         const val CATEGORY_BIRTHDAY = 0
