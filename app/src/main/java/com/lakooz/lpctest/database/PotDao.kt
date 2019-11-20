@@ -1,5 +1,6 @@
 package com.lakooz.lpctest.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -18,6 +19,6 @@ abstract class PotDao {
     abstract fun insertAllAndSynchronize(pots: List<Pot>)
 
     @Query("SELECT * FROM pot WHERE category=:category ORDER BY creationDate ASC")
-    abstract fun getPots(category: Int) : List<Pot>
+    abstract fun getPots(category: Int) : LiveData<List<Pot>>
 
 }

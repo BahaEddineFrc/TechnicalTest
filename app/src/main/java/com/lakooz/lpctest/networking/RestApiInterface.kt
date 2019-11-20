@@ -10,12 +10,12 @@ import retrofit2.http.POST
 
 interface RestApiInterface {
 
-    @GET("/get-pots")
+    @GET("get-pots")
     fun getPots(): Single<List<Pot>> //Single<Response<List<Pot>>>
 
 
     @FormUrlEncoded
-    @POST("/create-pot")
+    @POST("create-pot")
     fun createPot( @Field("category") category: Int ) : Single<Pot>
 
 }

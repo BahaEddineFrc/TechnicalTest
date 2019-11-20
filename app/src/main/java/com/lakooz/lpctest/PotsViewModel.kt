@@ -16,7 +16,7 @@ class PotsViewModel : ViewModel() {
         get() = _pots
 
     fun getPots(category: Int) {
-        _pots.value = repository.getPots(category)
+        _pots.value = (repository.getPots(category) as LiveData<List<Pot>>).value
     }
 
 

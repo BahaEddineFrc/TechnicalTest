@@ -1,6 +1,7 @@
 package com.lakooz.lpctest
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,9 +20,10 @@ class PotAdapter(private val context: Context, private var emptyView: View? = nu
 
 
     fun setPots(pots: List<Pot>?) {
+        Log.d("hereee","pots at Adapter = ${pots}")
         this.pots = pots
-        if (pots!!.isEmpty()) emptyView!!.visibility=View.VISIBLE
-        else emptyView!!.visibility=View.GONE
+        /*if (pots != null ) emptyView!!.visibility=View.VISIBLE//&& pots.isEmpty()
+        else emptyView!!.visibility=View.GONE*/
 
         notifyDataSetChanged()
 
@@ -37,7 +39,7 @@ class PotAdapter(private val context: Context, private var emptyView: View? = nu
 
     override fun getItemCount(): Int {
         // Done
-        return pots!!.size
+        return if (pots==null) 0 else pots!!.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

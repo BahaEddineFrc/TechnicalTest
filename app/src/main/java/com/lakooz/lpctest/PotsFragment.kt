@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -16,6 +17,7 @@ class PotsFragment : Fragment() {
 
     lateinit var model :PotsViewModel
     lateinit var recyclerView: RecyclerView
+    lateinit var emptyPlaceholder: LinearLayout
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,12 +30,10 @@ class PotsFragment : Fragment() {
 
         // set up recycler view
         recyclerView=binding.root.findViewById(R.id.recycler_view)
+        emptyPlaceholder=binding.root.findViewById(R.id.empty_placeholder)
 
 
         // Done : set up view model
-        //todo: get category number
-
-        var category = 1
         model = ViewModelProviders.of(this).get(PotsViewModel::class.java)
         binding.viewmodel=model
 
@@ -52,7 +52,7 @@ class PotsFragment : Fragment() {
 
         model.getPots(category)
         model.pots.observe(this, Observer { pots->
-            //adapter.setPots(pots)
+            adapter.setPots(pots)
         })
     }
 }

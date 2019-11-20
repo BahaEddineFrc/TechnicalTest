@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import com.google.android.material.snackbar.Snackbar
 import com.lakooz.lpctest.model.Pot
 import com.lakooz.lpctest.networking.RestApiClient
+import com.lakooz.lpctest.networking.RestApiClient.retrofit
 import com.lakooz.lpctest.repositories.PotRepository
 import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers

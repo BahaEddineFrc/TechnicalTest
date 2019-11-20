@@ -54,7 +54,9 @@ class MainActivity : AppCompatActivity() {
         model.error.observe(this, Observer { isError->
             if(isError)
                 Snackbar.make(root,R.string.error,Snackbar.LENGTH_SHORT)
-                    .setAction("Dismiss", View.OnClickListener {  })
+                    .setAction("Dismiss", View.OnClickListener {  }).show()
+            Log.d("heree","model.error.observe = ${isError}")
+
         })
 
 
@@ -71,14 +73,13 @@ class MainActivity : AppCompatActivity() {
             override fun onPageScrollStateChanged(state: Int) {
                 val viewPagerIdle = state == ViewPager2.SCROLL_STATE_IDLE
                 swipeRefreshLayout.isEnabled = viewPagerIdle
-                Log.d("heree","state = $state")
             }
         })
 
         fab.setOnClickListener {
-            // TODO : get category id
+            // TODO : test
             Log.d("heree","viewPager.currentItem = ${viewPager.currentItem}")
-            model.createPot(1)
+            model.createPot(viewPager.currentItem)
         }
     }
 
