@@ -31,12 +31,10 @@ class PotsFragment : Fragment() {
 
         val binding = PotsFragmentBinding.inflate(inflater, container, false)
 
-        // set up recycler view
         recyclerView = binding.root.findViewById(R.id.recycler_view)
         emptyPlaceholder = binding.root.findViewById(R.id.empty_placeholder)
 
 
-        // Done : set up view model
         model = ViewModelProviders.of(this).get(PotsViewModel::class.java)
         binding.viewmodel = model
 

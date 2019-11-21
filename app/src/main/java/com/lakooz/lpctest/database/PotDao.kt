@@ -9,9 +9,9 @@ import io.reactivex.Maybe
 @Dao
 abstract class PotDao {
 
-    //Done
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun createOrUpdate(pot: Pot) : Long
+    abstract fun createOrUpdate(pot: Pot) : Long //use return var to test its success
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract fun insertAllAndSynchronize(pots: List<Pot>) : List<Long>

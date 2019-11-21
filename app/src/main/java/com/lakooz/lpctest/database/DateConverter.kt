@@ -6,7 +6,6 @@ import java.util.Date
 
 
 class DateConverter {
-    // Done
     @TypeConverter
     fun fromTimestamp(mills: Long?): Date? {
         return if (mills == null) null else Date(mills)

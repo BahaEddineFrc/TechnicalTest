@@ -9,17 +9,17 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.bumptech.glide.manager.SupportRequestManagerFragment
 import java.lang.reflect.Modifier
 
-//Done : Set up the three tabs
+
 class ViewPagerAdapter(fm: FragmentManager, lifecycle: Lifecycle) : FragmentStateAdapter(fm, lifecycle) {
 
-    var fragMan=fm
-    var fragIds = listOf<Int>()
+    //var fragMan=fm
+    var fragmentsArr = listOf<PotsFragment>()
     override fun createFragment(position: Int): Fragment {
         var f1=PotsFragment()
         var f2=PotsFragment()
         var f3=PotsFragment()
 
-        fragIds=listOf (f1.id,f2.id,f3.id)
+        fragmentsArr=listOf (f1,f2,f3)
 
         var bundle = Bundle()
         bundle.putInt("category",position)
@@ -37,7 +37,10 @@ class ViewPagerAdapter(fm: FragmentManager, lifecycle: Lifecycle) : FragmentStat
     fun updateFragment(position: Int){
 
         try {
-            (fragMan.findFragmentById(fragIds[position] ) as PotsFragment).getUpdatedPotsForCategory()
+            fragmentsArr.get(position).getUpdatedPotsForCategory()
+            //(fragMan.findFragmentById(fragIds[position] ) as PotsFragment).getUpdatedPotsForCategory()
+            //(fragMan.fragments.get (position) as PotsFragment).getUpdatedPotsForCategory()
+
         }catch (e:Exception){
             e.printStackTrace()
         }

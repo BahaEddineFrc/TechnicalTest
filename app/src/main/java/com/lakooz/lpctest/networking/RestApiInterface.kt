@@ -11,7 +11,7 @@ import retrofit2.http.POST
 interface RestApiInterface {
 
     @GET("get-pots")
-    fun getPots(): Single<List<Pot>> //Single<Response<List<Pot>>>
+    fun getPots(): Single<List<Pot>>
 
 
     @FormUrlEncoded

@@ -23,9 +23,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //todo : load data
-
-        // Done : set content view and declare views
 
         setContentView(R.layout.activity_main)
         var viewPager=findViewById<ViewPager2>(R.id.viewPager2)
@@ -41,31 +38,30 @@ class MainActivity : AppCompatActivity() {
 
         TabLayoutMediator(tabLayout, viewPager,
             TabLayoutMediator.TabConfigurationStrategy { tab, position ->
-                // Done : set tabs titles
                 tab.text = TABS[position]
             }).attach()
 
 
         swipeRefreshLayout.setProgressViewOffset(true, START_SWIPE_REFRESH, resources.getDimension(R.dimen.swipe_refresh_offset).toInt())
 
-        // Done : set up view model
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         val model = ViewModelProviders.of(this).get(MainViewModel::class.java)
         binding.viewmodel=model
 
         model.getPots()
+
         model.error.observe(this, Observer { isError->
             if(isError)
-                Snackbar.make(root,R.string.error,Snackbar.LENGTH_SHORT)
-                    .setAction("Dismiss", View.OnClickListener {  }).show()
+                Snackbar.make(root,R.string.error,Snackbar.LENGTH_LONG).show()
         })
+
         model.isRefreshing.observe(this, Observer {it->
             swipeRefreshLayout.isRefreshing=it
         })
 
 
         swipeRefreshLayout.setOnRefreshListener {
-            // Done : test
             model.getPots()
             viewPagerAdapter.updateFragment(viewPager.currentItem)
 
@@ -79,10 +75,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         fab.setOnClickListener {
-            // Done : test
-            Log.d("heree","viewPager.currentItem = ${viewPager.currentItem}")
             model.createPot(viewPager.currentItem,viewPagerAdapter)
-
         }
     }
 

@@ -42,7 +42,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
                 override fun onSuccess(pots: List<Pot>) {
                     disposable?.dispose()
-                    // Done  //add to room
 
                     repository.insertAllAndSynchronize(pots)
                     _isRefreshing.value = false
@@ -50,8 +49,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 }
 
                 override fun onError(e: Throwable) {
-                    // Done //display msg
-                    Log.d("heree", "getPots onError ${e.message}")
                     _isRefreshing.value = false
                     _error.value = true
                 }
@@ -78,20 +75,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
                 override fun onSuccess(pot: Pot) {
                     disposable?.dispose()
-                    //Done //add to room
 
-                    Log.d("hereee", "createPot response : $pot")
                     repository.createOrUpdate(pot)
                     viewPagerAdapter.updateFragment(category)
-
 
                     _isRefreshing.value = false
                     _error.value = false
                 }
 
                 override fun onError(e: Throwable) {
-                    //Done //display msg
-                    Log.d("heree", "createPot onError ${e.message}")
                     _isRefreshing.value = false
                     _error.value = true
                 }

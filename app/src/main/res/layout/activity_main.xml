@@ -9,7 +9,6 @@
             name="viewmodel"
             type="com.lakooz.lpctest.MainViewModel" />
     </data>
-    <!-- implemented databinding-->
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"

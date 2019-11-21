@@ -11,13 +11,11 @@ class PotsViewModel : ViewModel() {
 
     private val repository = PotRepository.instance
 
-    // Done : initialize
     private val _pots = MutableLiveData<List<Pot>>()
     val pots: LiveData<List<Pot>>
         get() = _pots
 
     fun getPots(category: Int) {
-        Log.d("PotsViewModel","PotsViewModel getting category $category from local : "+repository.getPots(category).toString())
         _pots.postValue(repository.getPots(category))
     }
 

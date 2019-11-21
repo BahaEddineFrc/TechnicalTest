@@ -8,7 +8,6 @@ import com.lakooz.lpctest.R
 
 @BindingAdapter("android:imageUrl")
 fun setImageUrl(imageView: ImageView, url: String?) {
-    // Done added Glide
     if (url != null)
         Glide
             .with(imageView.context)

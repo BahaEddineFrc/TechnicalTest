@@ -9,18 +9,10 @@ import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.lakooz.lpctest.model.Pot
 
-
-// 1.Database: Contains the database holder and serves as the main access point for the connection to data
-// 2.Entity: Represents a table within the database
-// 3.DAO: Contains the methods used for accessing the database
-
-// Done entities
 @Database(entities = [Pot::class], version = 1)
 @TypeConverters(DateConverter::class)
 
 abstract class AppDatabase : RoomDatabase() {
-
-    //Done : potDao
 
     abstract fun potDao() : PotDao
 
@@ -28,11 +20,9 @@ abstract class AppDatabase : RoomDatabase() {
 
         private const val DATABASE_NAME = "db_lpc_test"
 
-        //@Volatile
         private var instance: AppDatabase? = null
 
 
-        // Done : implement
         private fun buildDatabase(context: Context) : AppDatabase {
             return Room.
                 databaseBuilder( context, AppDatabase::class.java, DATABASE_NAME)
@@ -40,12 +30,7 @@ abstract class AppDatabase : RoomDatabase() {
                 .addCallback(object : Callback() {
                     override fun onOpen(db: SupportSQLiteDatabase) {
                         super.onOpen(db)
-                        Log.d("heree","database opened")
-                    }
-
-                    override fun onCreate(db: SupportSQLiteDatabase) {
-                        super.onCreate(db)
-                        Log.d("heree","database created")
+                        Log.d("AppDatabase","database opened")
                     }
                 })
                 .build()

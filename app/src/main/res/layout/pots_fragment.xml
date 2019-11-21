@@ -18,7 +18,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <!-- Done : add empty view -->
         <LinearLayout
             android:id="@+id/empty_placeholder"
             android:visibility="@{viewmodel.pots.empty? 1 : 8}"

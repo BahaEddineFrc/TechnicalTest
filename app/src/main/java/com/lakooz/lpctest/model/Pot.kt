@@ -16,7 +16,6 @@ data class Pot(
     val amount: Double,
     val imageUrl: String?
 ) {
-    //Done
 
     companion object {
         const val CATEGORY_BIRTHDAY = 0

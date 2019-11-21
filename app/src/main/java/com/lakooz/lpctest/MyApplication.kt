@@ -9,7 +9,6 @@ class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        //Done
         database = AppDatabase.getInstance(applicationContext)
 
     }
