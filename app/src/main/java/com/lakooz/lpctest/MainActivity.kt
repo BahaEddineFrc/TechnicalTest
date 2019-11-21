@@ -1,6 +1,5 @@
 package com.lakooz.lpctest
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -35,7 +34,8 @@ class MainActivity : AppCompatActivity() {
         var swipeRefreshLayout=findViewById<SwipeRefreshLayout>(R.id.swipe_refresh_layout)
         var fab=findViewById<FloatingActionButton>(R.id.fab)
 
-        viewPager.adapter = ViewPagerAdapter(supportFragmentManager, lifecycle)
+        var viewPagerAdapter = ViewPagerAdapter(supportFragmentManager, lifecycle)
+        viewPager.adapter = viewPagerAdapter
 
         setSupportActionBar(toolbar)
 
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
             }).attach()
 
 
-       swipeRefreshLayout.setProgressViewOffset(true, START_SWIPE_REFRESH, resources.getDimension(R.dimen.swipe_refresh_offset).toInt())
+        swipeRefreshLayout.setProgressViewOffset(true, START_SWIPE_REFRESH, resources.getDimension(R.dimen.swipe_refresh_offset).toInt())
 
         // Done : set up view model
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -54,21 +54,21 @@ class MainActivity : AppCompatActivity() {
         binding.viewmodel=model
 
         model.getPots()
-
         model.error.observe(this, Observer { isError->
             if(isError)
                 Snackbar.make(root,R.string.error,Snackbar.LENGTH_SHORT)
                     .setAction("Dismiss", View.OnClickListener {  }).show()
         })
-
+        model.isRefreshing.observe(this, Observer {it->
+            swipeRefreshLayout.isRefreshing=it
+        })
 
 
         swipeRefreshLayout.setOnRefreshListener {
             // Done : test
             model.getPots()
-            model.isRefreshing.observe(this, Observer {it->
-                swipeRefreshLayout.isRefreshing=it
-            })
+            viewPagerAdapter.updateFragment(viewPager.currentItem)
+
         }
 
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
@@ -81,7 +81,8 @@ class MainActivity : AppCompatActivity() {
         fab.setOnClickListener {
             // Done : test
             Log.d("heree","viewPager.currentItem = ${viewPager.currentItem}")
-            model.createPot(viewPager.currentItem)
+            model.createPot(viewPager.currentItem,viewPagerAdapter)
+
         }
     }
 

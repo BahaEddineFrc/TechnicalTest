@@ -17,7 +17,7 @@ class PotsViewModel : ViewModel() {
         get() = _pots
 
     fun getPots(category: Int) {
-        Log.d("hereee","PotsViewModel getting category $category from local : "+repository.getPots(category).toString())
+        Log.d("PotsViewModel","PotsViewModel getting category $category from local : "+repository.getPots(category).toString())
         _pots.postValue(repository.getPots(category))
     }
 

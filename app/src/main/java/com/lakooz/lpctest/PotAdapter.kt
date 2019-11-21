@@ -20,10 +20,10 @@ class PotAdapter(private val context: Context, private var emptyView: View? = nu
 
 
     fun setPots(pots: List<Pot>?) {
-        Log.d("hereee","pots at Adapter = ${pots}")
+        //Log.d("hereee","pots at Adapter = ${pots}")
         this.pots = pots
-        /*if (pots != null ) emptyView!!.visibility=View.VISIBLE//&& pots.isEmpty()
-        else emptyView!!.visibility=View.GONE*/
+        if (pots == null || pots.isEmpty()) emptyView!!.visibility=View.VISIBLE
+        else emptyView!!.visibility=View.GONE
 
         notifyDataSetChanged()
 
@@ -43,9 +43,11 @@ class PotAdapter(private val context: Context, private var emptyView: View? = nu
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        // TODO : bind view holder & "format amount properly" (i don't get it)
+        // Done works : bind view holder & "format amount properly" (Done in XML anyway)
         val pot = pots!![position]
         holder.binding.pot=pot
+        holder.binding.potAmount.text=pot.amount.toString()
+        holder.binding.potCount.text=pot.contributorsCount.toString()
 
     }
 
@@ -61,10 +63,5 @@ class PotAdapter(private val context: Context, private var emptyView: View? = nu
         super.onDetachedFromRecyclerView(recyclerView)
     }
 
-    inner class ViewHolder(val binding: PotItemBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind( pot: Pot) {
-            binding.pot  = pot
-            //binding.executePendingBindings()
-        }
-    }
+    inner class ViewHolder(val binding: PotItemBinding) : RecyclerView.ViewHolder(binding.root)
 }

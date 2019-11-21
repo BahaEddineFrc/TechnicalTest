@@ -5,15 +5,12 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.android.material.snackbar.Snackbar
 import com.lakooz.lpctest.model.Pot
 import com.lakooz.lpctest.networking.RestApiClient
-import com.lakooz.lpctest.networking.RestApiClient.retrofit
 import com.lakooz.lpctest.repositories.PotRepository
 import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.internal.operators.single.SingleObserveOn
 import io.reactivex.schedulers.Schedulers
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
@@ -30,7 +27,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getPots() {
 
-        _isRefreshing.value=true
+        _isRefreshing.value = true
 
         RestApiClient.getPots()
             .subscribeOn(Schedulers.io())
@@ -47,18 +44,16 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                     disposable?.dispose()
                     // Done  //add to room
 
-
-                    Log.d("hereee","local repository PotsNumber : "
-                            + repository.insertAllAndSynchronize(pots).size)
-                    _isRefreshing.value=false
-                    _error.value=false
+                    repository.insertAllAndSynchronize(pots)
+                    _isRefreshing.value = false
+                    _error.value = false
                 }
 
                 override fun onError(e: Throwable) {
                     // Done //display msg
-                    Log.d("heree","getPots onError ${e.message}")
-                    _isRefreshing.value=false
-                    _error.value=true
+                    Log.d("heree", "getPots onError ${e.message}")
+                    _isRefreshing.value = false
+                    _error.value = true
                 }
 
             }
@@ -66,9 +61,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             )
     }
 
-    fun createPot(category: Int) {
+    fun createPot(category: Int, viewPagerAdapter: ViewPagerAdapter) {
 
-        _isRefreshing.value=true
+        _isRefreshing.value = true
 
         RestApiClient.createPot(category)
             .subscribeOn(Schedulers.io())
@@ -85,25 +80,26 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                     disposable?.dispose()
                     //Done //add to room
 
-                    Log.d("hereee","Locally savePot response : "
-                            + repository.createOrUpdate(pot))
+                    Log.d("hereee", "createPot response : $pot")
+                    repository.createOrUpdate(pot)
+                    viewPagerAdapter.updateFragment(category)
 
-                    _isRefreshing.value=false
-                    _error.value=false
+
+                    _isRefreshing.value = false
+                    _error.value = false
                 }
 
                 override fun onError(e: Throwable) {
                     //Done //display msg
-                    Log.d("heree","createPot onError ${e.message}")
-                    _isRefreshing.value=false
-                    _error.value=true
+                    Log.d("heree", "createPot onError ${e.message}")
+                    _isRefreshing.value = false
+                    _error.value = true
                 }
 
             }
 
             )
     }
-
 
 
 }

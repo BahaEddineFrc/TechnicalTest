@@ -16,13 +16,12 @@ class PotRepository(private val potDao: PotDao) {
 
     fun insertAllAndSynchronize(pots: List<Pot>) : List<Long> {
        return potDao.insertAllAndSynchronize(pots)
-        //Log.d("hereee","PotRepository getting instance : "+instance)
     }
 
-    fun getPots(category: Int) = potDao.getPots() //category
+    fun getPots(category: Int) = potDao.getPots(category)
 
     companion object {
-        // TODO : toTest
+        // Done works : toTest
         val instance : PotRepository= PotRepository(MyApplication.database.potDao())
     }
 

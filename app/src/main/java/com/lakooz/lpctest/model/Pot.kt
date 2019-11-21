@@ -12,7 +12,7 @@ data class Pot(
     val name: String,
     val creationDate: String,
     val category: Int,
-    val contributersCount: Int,
+    val contributorsCount: Int,
     val amount: Double,
     val imageUrl: String?
 ) {
@@ -25,7 +25,7 @@ data class Pot(
     }
 
     override fun toString(): String {
-        return "Pot(id='$identifier', name='$name', creationDate='$creationDate', category=$category, contributersCount=$contributersCount, amount=$amount, imageUrl=$imageUrl)"
+        return "Pot(id='$identifier', name='$name', creationDate='$creationDate', category=$category, contributersCount=$contributorsCount, amount=$amount, imageUrl=$imageUrl)"
     }
 
 
