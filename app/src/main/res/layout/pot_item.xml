@@ -30,7 +30,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:srcCompat="@drawable/ic_launcher_background"
-                    android:scaleType="centerCrop"
+                    android:scaleType="centerCrop" 
                     android:foreground="@drawable/pot_gradient_mask"
                     android:layout_marginBottom="5dp"
                     android:imageUrl="@{pot.imageUrl}"
