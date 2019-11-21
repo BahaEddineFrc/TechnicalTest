@@ -1,5 +1,6 @@
 package com.lakooz.lpctest
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,7 +17,8 @@ class PotsViewModel : ViewModel() {
         get() = _pots
 
     fun getPots(category: Int) {
-        _pots.value = (repository.getPots(category) as LiveData<List<Pot>>).value
+        Log.d("hereee","PotsViewModel getting category $category from local : "+repository.getPots(category).toString())
+        _pots.postValue(repository.getPots(category))
     }
 
 

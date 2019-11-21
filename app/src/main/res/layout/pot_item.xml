@@ -60,7 +60,6 @@
                     style="@style/TextAppearance.AppCompat.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="@string/pot_amount"
                     android:text="@{pot.amount+` €`}" />
 
                 <TextView
@@ -68,13 +67,13 @@
                     style="@style/TextAppearance.AppCompat.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/pot_amount"
+                    android:layout_toEndOf="@+id/pot_amount"
                     android:hint=" récoltés"
                     android:text="@{pot.amount &lt; 2? ` récolté` : ` récoltés`}" />
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_marginEnd="5dp"
                     android:layout_marginRight="5dp"
                     android:layout_toStartOf="@+id/pot_count"
@@ -90,7 +89,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:hint="nbr"
-                    android:text="@{pot.contributersCount}" />
+                    android:text="@{``+pot.contributersCount}" />
             </RelativeLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

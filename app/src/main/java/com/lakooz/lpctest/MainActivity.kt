@@ -53,12 +53,12 @@ class MainActivity : AppCompatActivity() {
         val model = ViewModelProviders.of(this).get(MainViewModel::class.java)
         binding.viewmodel=model
 
+        model.getPots()
+
         model.error.observe(this, Observer { isError->
             if(isError)
                 Snackbar.make(root,R.string.error,Snackbar.LENGTH_SHORT)
                     .setAction("Dismiss", View.OnClickListener {  }).show()
-            Log.d("heree","model.error.observe = ${isError}")
-
         })
 
 

@@ -46,8 +46,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 override fun onSuccess(pots: List<Pot>) {
                     disposable?.dispose()
                     // Done  //add to room
-                    Log.d("heree","getPots onSuccess ${pots}")
-                    repository?.insertAllAndSynchronize(pots)
+
+
+                    Log.d("hereee","local repository PotsNumber : "
+                            + repository.insertAllAndSynchronize(pots).size)
                     _isRefreshing.value=false
                     _error.value=false
                 }
@@ -80,10 +82,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 }
 
                 override fun onSuccess(pot: Pot) {
-                    Log.d("heree","createPot onSuccess")
                     disposable?.dispose()
                     //Done //add to room
-                    repository?.createOrUpdate(pot)
+
+                    Log.d("hereee","Locally savePot response : "
+                            + repository.createOrUpdate(pot))
+
                     _isRefreshing.value=false
                     _error.value=false
                 }

@@ -47,10 +47,10 @@ class PotsFragment : Fragment() {
         var adapter = PotAdapter(context!!,empty_placeholder)
         recyclerView.adapter=adapter
 
-        var category = 1
+        arguments?.getInt("category")?.let {category->
+            model.getPots(category)
+        }
 
-
-        model.getPots(category)
         model.pots.observe(this, Observer { pots->
             adapter.setPots(pots)
         })

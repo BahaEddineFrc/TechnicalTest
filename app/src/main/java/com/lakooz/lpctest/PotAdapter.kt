@@ -45,7 +45,7 @@ class PotAdapter(private val context: Context, private var emptyView: View? = nu
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // TODO : bind view holder & "format amount properly" (i don't get it)
         val pot = pots!![position]
-        holder.bind(pot)
+        holder.binding.pot=pot
 
     }
 
@@ -64,7 +64,7 @@ class PotAdapter(private val context: Context, private var emptyView: View? = nu
     inner class ViewHolder(val binding: PotItemBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind( pot: Pot) {
             binding.pot  = pot
-            binding.executePendingBindings()
+            //binding.executePendingBindings()
         }
     }
 }

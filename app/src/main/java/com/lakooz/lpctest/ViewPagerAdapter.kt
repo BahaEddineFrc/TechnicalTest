@@ -1,5 +1,6 @@
 package com.lakooz.lpctest
 
+import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
@@ -10,7 +11,11 @@ class ViewPagerAdapter(fm: FragmentManager, lifecycle: Lifecycle) : FragmentStat
 
 
     override fun createFragment(position: Int): Fragment {
-        return PotsFragment()
+        var fragment = PotsFragment()
+        var bundle = Bundle()
+        bundle.putInt("category",position)
+        fragment.arguments = bundle
+        return fragment
     }
 
     override fun getItemCount() = 3

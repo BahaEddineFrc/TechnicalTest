@@ -1,24 +1,22 @@
 package com.lakooz.lpctest.database
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.lakooz.lpctest.model.Pot
+import io.reactivex.Maybe
 
 
 @Dao
 abstract class PotDao {
 
     //Done
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    abstract fun createOrUpdate(pot: Pot)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    abstract fun createOrUpdate(pot: Pot) : Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun insertAllAndSynchronize(pots: List<Pot>)
+    abstract fun insertAllAndSynchronize(pots: List<Pot>) : List<Long>
 
-    @Query("SELECT * FROM pot WHERE category=:category ORDER BY creationDate ASC")
-    abstract fun getPots(category: Int) : LiveData<List<Pot>>
+    @Query("SELECT * FROM POT")//WHERE category=:category ORDER BY creationDate ASC
+    abstract fun getPots() : List<Pot> //category: Int
 
 }

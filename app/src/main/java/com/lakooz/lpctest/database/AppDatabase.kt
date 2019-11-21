@@ -1,10 +1,12 @@
 package com.lakooz.lpctest.database
 
 import android.content.Context
+import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.lakooz.lpctest.model.Pot
 
 
@@ -26,7 +28,7 @@ abstract class AppDatabase : RoomDatabase() {
 
         private const val DATABASE_NAME = "db_lpc_test"
 
-        @Volatile
+        //@Volatile
         private var instance: AppDatabase? = null
 
 
@@ -35,6 +37,17 @@ abstract class AppDatabase : RoomDatabase() {
             return Room.
                 databaseBuilder( context, AppDatabase::class.java, DATABASE_NAME)
                 .allowMainThreadQueries()
+                .addCallback(object : Callback() {
+                    override fun onOpen(db: SupportSQLiteDatabase) {
+                        super.onOpen(db)
+                        Log.d("heree","database opened")
+                    }
+
+                    override fun onCreate(db: SupportSQLiteDatabase) {
+                        super.onCreate(db)
+                        Log.d("heree","database created")
+                    }
+                })
                 .build()
         }
 
@@ -46,6 +59,7 @@ abstract class AppDatabase : RoomDatabase() {
                     }
                 }
             }
+
             return instance!!
         }
 
